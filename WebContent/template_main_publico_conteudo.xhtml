@@ -1,0 +1,27 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="template_main.xhtml">
+	<ui:insert name="js" />
+
+	<ui:define name="menu">
+		<h:outputLink
+			value="#{facesContext.externalContext.requestContextPath}/institucional.jsf">Institucional</h:outputLink>
+		<h:outputLink
+			value="#{facesContext.externalContext.requestContextPath}/login.jsf">Login</h:outputLink>
+	</ui:define>
+
+
+	<ui:define name="logo">
+		<h:outputLink
+			value="#{facesContext.externalContext.requestContextPath}/index.jsf">
+			<h:graphicImage library="images" name="logo.png" id="logo_canto" />
+		</h:outputLink>
+	</ui:define>
+
+	<ui:insert name="conteudo" />
+</ui:composition>
+</html>

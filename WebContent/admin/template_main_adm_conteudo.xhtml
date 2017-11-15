@@ -1,0 +1,36 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="../template_main.xhtml">
+	<ui:insert name="js" />
+
+	<ui:define name="menu">
+		<h:outputLink
+			value="#{facesContext.externalContext.requestContextPath}/admin/categoria/pesquisa_categoria.jsf">Categorias</h:outputLink>
+		<h:outputLink
+			value="#{facesContext.externalContext.requestContextPath}/admin/produto/pesquisa_produto.jsf">Produtos</h:outputLink>
+		<h:outputLink
+			value="#{facesContext.externalContext.requestContextPath}/admin/supermercado/pesquisa_supermercado.jsf">Supermercados</h:outputLink>
+		<h:outputLink rendered="#{loginBean.ehAdministrador}"
+			value="#{facesContext.externalContext.requestContextPath}/admin/usuario/pesquisa_usuario.jsf">Usuários</h:outputLink>
+
+		<h:form id="login" prependId="false">
+			<h:outputText
+				value="Bem vindo(a), #{loginBean.usuarioLogado.nome} :) |" />
+			<h:commandLink action="#{loginBean.sair}" value="Sair" id="sair" />
+		</h:form>
+	</ui:define>
+
+	<ui:define name="logo">
+		<h:outputLink
+			value="#{facesContext.externalContext.requestContextPath}/admin/admin.jsf">
+			<h:graphicImage library="images" name="logo.png" id="logo_canto" />
+		</h:outputLink>
+	</ui:define>
+
+	<ui:insert name="conteudo" />
+</ui:composition>
+</html>

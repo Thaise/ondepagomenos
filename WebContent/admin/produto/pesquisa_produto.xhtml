@@ -1,0 +1,129 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="../template_main_adm_conteudo.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="form_pesquisa_produto" prependId="false">
+			<p:messages id="messages_pesq" showDetail="false" autoUpdate="true"
+				closable="true" />
+			<h2>Pesquisa de Produto</h2>
+
+			<h:panelGroup id="campos_filtro" layout="block">
+				<h:panelGroup styleClass="bloco" layout="block">
+					<div class="filtro">
+						<p:outputLabel value="Nome: " for="nome" />
+						<p:inputText value="#{produtoReportBean.produtoFiltro.nome}"
+							id="nome" />
+					</div>
+
+					<div class="filtro">
+						<p:outputLabel value="Estado: " for="estado" />
+						<p:selectOneMenu id="estado" label="Estado"
+							value="#{produtoReportBean.produtoFiltro.supermercado.estado}"
+							converter="estadoConverter">
+							<f:selectItems value="#{produtoReportBean.estados}" var="c"
+								itemLabel="#{c.uf}" />
+							<p:ajax event="change" process="@this"
+								listener="#{produtoReportBean.buscaRegiaoEstado}"
+								update="regiao" />
+						</p:selectOneMenu>
+					</div>
+					<div class="filtro">
+						<p:outputLabel value="Regiao: " for="regiao" />
+						<p:selectOneMenu id="regiao" label="Regiao"
+							value="#{produtoReportBean.produtoFiltro.supermercado.regiao}"
+							converter="regiaoConverter">
+							<f:selectItem itemLabel="Selecione" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{produtoReportBean.regioes}" var="c"
+								itemLabel="#{c.nome}" />
+						</p:selectOneMenu>
+					</div>
+				</h:panelGroup>
+				<h:panelGroup styleClass="bloco" layout="block">
+					<div class="filtro">
+						<p:outputLabel value="Categoria: " for="categoria" />
+						<p:selectOneMenu id="categoria" label="Categoria"
+							value="#{produtoReportBean.produtoFiltro.categoria}"
+							converter="categoriaConverter">
+							<f:selectItem itemLabel="Selecione" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{produtoReportBean.categorias}" var="c"
+								itemLabel="#{c.nome}" />
+						</p:selectOneMenu>
+					</div>
+				</h:panelGroup>
+				<h:commandButton value="Filtrar" ajax="false"
+					process="tabela_pesq_prod" update="tabela_pesq_prod" />
+				<h:commandButton value="Limpar" action="#{produtoReportBean.limpar}"
+					process="tabela_pesq_prod" update="tabela_pesq_prod" />
+			</h:panelGroup>
+
+			<h:panelGroup id="tabela" layout="block">
+				<p:dataTable id="tabela_pesq_prod" var="prod"
+					emptyMessage="Não há registros"
+					value="#{produtoReportBean.lazyModel}" paginatorPosition="botttom"
+					paginator="true" rows="10"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					rowsPerPageTemplate="5,10,15" lazy="true">
+					<p:column headerText="Nome">
+						<h:outputText value="#{prod.nome}" />
+					</p:column>
+					<p:column headerText="Marca">
+						<h:outputText value="#{prod.marca}" />
+					</p:column>
+					<p:column headerText="Preço" styleClass="texto_centro" width="70">
+						<h:outputText value="R$ #{prod.preco}">
+							<f:convertNumber maxIntegerDigits="4" maxFractionDigits="2"
+								pattern="####,##" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Fim vigência" styleClass="texto_centro"
+						width="100">
+						<h:outputText value="#{prod.dtFimVigencia}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Categoria">
+						<h:outputText value="#{prod.categoria.nome}" />
+					</p:column>
+					<p:column headerText="Supermercado">
+						<h:outputText value="#{prod.supermercado.nome}" />
+					</p:column>
+					<p:column width="50">
+						<p:commandLink value="Editar" ajax="false"
+							action="#{produtoReportBean.atualiza(prod.idProduto)}" />
+					</p:column>
+					<p:column width="50">
+						<p:commandLink value="Excluir"
+							oncomplete="PF('dlgExclusao').show();"
+							action="#{produtoReportBean.selecionaParaDeletar(prod)}"
+							update=":dlgExclusao" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+
+			<p:dialog header="Excluir Produto" widgetVar="dlgExclusao"
+				id="dlgExclusao" modal="true" height="100">
+				<h:outputText
+					value="Deseja excluir o produto '#{produtoReportBean.paraDeletar.nome}'?" />
+				<h:panelGroup layout="block" styleClass="botoes_dialog">
+					<p:commandButton value="Sim" onclick="PF('dlgExclusao').close();"
+						action="#{produtoReportBean.excluir()}"
+						process="form_pesquisa_produto" update="tabela_pesq_prod" />
+					<p:commandButton value="Não" onclick="PF('dlgExclusao').close();" />
+				</h:panelGroup>
+			</p:dialog>
+
+			<h:panelGroup id="botoes" layout="block">
+				<h:commandButton value="Cadastrar" action="cadastro_produto.jsf"
+					styleClass="botao_cadastrar" />
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

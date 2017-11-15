@@ -1,0 +1,67 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="../template_main_adm_conteudo.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="form_usuario" prependId="false" styleClass="cadastro">
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+			<h2>Cadastro de Usuario</h2>
+
+			<h:panelGroup id="campos_usuario" layout="block">
+				<p:outputLabel value="Nome:" for="nome" />
+				<p:inputText value="#{usuarioBean.usuario.nome}" label="Nome"
+					required="true" id="nome" />
+
+				<p:outputLabel value="E-mail:" for="email" />
+				<p:inputText value="#{usuarioBean.usuario.email}" label="E-mail"
+					required="true" id="email" validatorMessage="E-mail incorreto!">
+					<f:validateRegex pattern="[a-z._-]+@[a-z.]+" />
+				</p:inputText>
+
+				<p:outputLabel value="Login:" for="login_usu" />
+				<p:inputText value="#{usuarioBean.usuario.login}" label="Login"
+					required="true" id="login_usu" disabled="#{not usuarioBean.ehNovo}" />
+
+				<h:panelGroup id="senha_panel" rendered="#{usuarioBean.ehNovo}">
+					<p:outputLabel value="Senha:" for="senha" />
+					<p:password value="#{usuarioBean.usuario.senha}" label="Senha"
+						id="senha" required="true" />
+				</h:panelGroup>
+
+				<p:outputLabel value="Perfil:" for="perfil" />
+				<p:selectOneMenu id="perfil" label="Perfil" required="true"
+					disabled="#{not usuarioBean.habilitaInativacao}"
+					value="#{usuarioBean.usuario.perfil}" converter="perfilConverter">
+					<f:selectItem itemLabel="Selecione" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{usuarioBean.perfis}" />
+				</p:selectOneMenu>
+
+			</h:panelGroup>
+
+			<h:panelGroup id="botoes_usuario" layout="block">
+				<h:commandButton value="Salvar"
+					action="#{usuarioBean.insereOuAtualiza}" />
+				<h:commandButton value="Inativar" action="#{usuarioBean.inativar}"
+					rendered="#{not usuarioBean.ehNovo and usuarioBean.usuario.flExcluido == 0 and usuarioBean.habilitaInativacao}" />
+
+				<h:commandButton value="Ativar" action="#{usuarioBean.ativar}"
+					rendered="#{not usuarioBean.ehNovo and usuarioBean.usuario.flExcluido == 1 and usuarioBean.habilitaInativacao}" />
+
+				<h:commandButton value="Limpar" action="#{usuarioBean.limpar}"
+					rendered="#{usuarioBean.ehNovo}">
+					<p:ajax update="campos_usuario" resetValues="true" />
+				</h:commandButton>
+
+				<h:commandButton value="Voltar" styleClass="botao_cancelar"
+					action="#{usuarioBean.cancelar}" immediate="true" />
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

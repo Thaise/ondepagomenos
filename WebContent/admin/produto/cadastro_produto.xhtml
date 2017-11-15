@@ -1,0 +1,105 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="../template_main_adm_conteudo.xhtml">
+	<ui:define name="js">
+		<h:outputScript library="js" name="datepicker_ptBR.js" />
+		<h:outputScript library="js"
+			name="jquery_mask/dist/jquery.mask.min.js" />
+		<script>
+			$(document).ready(function() {
+				$('#preco').mask('#.##0,00', {
+					reverse : true
+				});
+			});
+		</script>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="form_prod" prependId="false" styleClass="cadastro">
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+			<h2>Cadastro de Produto</h2>
+
+			<h:panelGroup id="campos_cadastro" layout="block">
+				<p:outputLabel value="Nome:" for="nome" />
+				<p:inputText value="#{produtoBean.produto.nome}" label="Nome"
+					required="true" id="nome" />
+
+				<p:outputLabel value="Marca:" for="marca" />
+				<p:inputText value="#{produtoBean.produto.marca}" label="Marca"
+					required="true" id="marca" />
+
+				<p:outputLabel value="Preço:" for="preco" />
+				<p:inputText value="#{produtoBean.produto.preco}" label="Preço"
+					required="true" id="preco">
+					<f:convertNumber maxIntegerDigits="4" maxFractionDigits="2"
+						pattern="####,##" />
+				</p:inputText>
+
+				<p:outputLabel for="popupInicio" value="Data início de vigência: " />
+				<p:calendar id="popupInicio" label="Data início de vigência"
+					value="#{produtoBean.produto.dtInicioVigencia}"
+					pattern="dd/MM/yyyy" required="true" />
+				<p:dialog modal="true" resizable="false" header="Values"
+					widgetVar="dlg" showEffect="fold">
+					<h:outputText value="#{produtoBean.produto.dtInicioVigencia}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:dialog>
+
+				<p:outputLabel for="popupFim" value="Data fim de vigência: " />
+				<p:calendar id="popupFim" label="Data fim de vigência"
+					value="#{produtoBean.produto.dtFimVigencia}" pattern="dd/MM/yyyy"
+					required="true" />
+				<p:dialog modal="true" resizable="false" header="Values"
+					widgetVar="dlg" showEffect="fold">
+					<h:outputText value="#{produtoBean.produto.dtFimVigencia}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:dialog>
+
+				<p:outputLabel value="Categoria:" for="categoria" />
+				<p:selectOneMenu id="categoria" label="Categoria" required="true"
+					value="#{produtoBean.produto.categoria}"
+					converter="categoriaConverter">
+					<f:selectItem itemLabel="Selecione" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{produtoBean.categorias}" var="c"
+						itemLabel="#{c.nome}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Supermercado:" for="super" />
+				<p:selectOneMenu id="super" label="Supermercado" required="true"
+					value="#{produtoBean.produto.supermercado}"
+					noSelectionOption="true" converter="supermercadoConverter">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{produtoBean.supermercados}" var="s"
+						itemLabel="#{s.nome}" />
+				</p:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup id="botoes_cadastro" layout="block">
+				<h:commandButton value="Salvar"
+					action="#{produtoBean.insereOuAtualiza}" />
+				<h:commandButton value="Excluir" action="#{produtoBean.excluir}"
+					rendered="#{not produtoBean.ehNovo}" />
+
+				<h:commandButton value="Limpar" action="#{produtoBean.limpar}"
+					rendered="#{produtoBean.ehNovo}">
+					<p:ajax update="campos_cadastro" resetValues="true" />
+				</h:commandButton>
+
+				<h:commandButton value="Voltar" action="#{produtoBean.cancelar}"
+					immediate="true" styleClass="botao_cancelar"/>
+			</h:panelGroup>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
