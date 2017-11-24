@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.edu.usj.ondepagomenos.bean.LoginBean;
 import br.edu.usj.ondepagomenos.entidades.Perfil;
+import br.edu.usj.ondepagomenos.view.LoginBean;
 
 @WebFilter(urlPatterns = {"/admin/usuario/*"})
 public class AdministradorFilter implements Filter {
