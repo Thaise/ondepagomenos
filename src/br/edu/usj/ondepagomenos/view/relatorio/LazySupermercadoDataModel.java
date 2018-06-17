@@ -6,7 +6,8 @@ import java.util.Map;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
-import br.edu.usj.ondepagomenos.entidades.Supermercado;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
 import br.edu.usj.ondepagomenos.model.SupermercadoModel;
 
 public class LazySupermercadoDataModel extends LazyDataModel<Supermercado> {

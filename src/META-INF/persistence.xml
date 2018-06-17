@@ -6,12 +6,12 @@
 
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-		<class>br.edu.usj.ondepagomenos.entidades.Categoria</class>
-		<class>br.edu.usj.ondepagomenos.entidades.Estado</class>
-		<class>br.edu.usj.ondepagomenos.entidades.Produto</class>
-		<class>br.edu.usj.ondepagomenos.entidades.Regiao</class>
-		<class>br.edu.usj.ondepagomenos.entidades.Supermercado</class>
-		<class>br.edu.usj.ondepagomenos.entidades.Usuario</class>
+		<class>br.edu.usj.ondepagomenos.dao.Categoria</class>
+		<class>br.edu.usj.ondepagomenos.dao.Estado</class>
+		<class>br.edu.usj.ondepagomenos.dao.Produto</class>
+		<class>br.edu.usj.ondepagomenos.dao.Regiao</class>
+		<class>br.edu.usj.ondepagomenos.dao.Supermercado</class>
+		<class>br.edu.usj.ondepagomenos.dao.Usuario</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

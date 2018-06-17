@@ -8,9 +8,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
-import br.edu.usj.ondepagomenos.entidades.Produto;
-import br.edu.usj.ondepagomenos.entidades.Supermercado;
+import br.edu.usj.ondepagomenos.dao.Categoria;
+import br.edu.usj.ondepagomenos.dao.Produto;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
 import br.edu.usj.ondepagomenos.model.AbstractModel;
 import br.edu.usj.ondepagomenos.model.CategoriaModel;
 import br.edu.usj.ondepagomenos.model.ProdutoModel;
@@ -98,7 +98,7 @@ public class ProdutoBean extends AbstractBean<Produto> {
 	}
 
 	public String cancelar() {
-		return "/admin/produto/pesquisa_produto.jsf";
+		return "/usuario/produto/pesquisa_produto.jsf";
 	}
 
 	public Produto getProduto() {

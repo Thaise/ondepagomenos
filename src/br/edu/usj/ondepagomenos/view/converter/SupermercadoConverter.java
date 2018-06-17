@@ -5,8 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
-import br.edu.usj.ondepagomenos.entidades.Supermercado;
+import br.edu.usj.ondepagomenos.dao.Categoria;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
 
 @FacesConverter(value = "supermercadoConverter")    
 public class SupermercadoConverter implements Converter {

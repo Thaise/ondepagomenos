@@ -1,0 +1,87 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="../../template_main_adm_conteudo.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="form_pesquisa_usuario" prependId="false">
+			<p:messages id="messages_pesq" showDetail="false" autoUpdate="true"
+				closable="true" />
+			<h2>Pesquisa de Usuário</h2>
+
+			<h:panelGroup id="campos_filtro" layout="block">
+				<div class="filtro">
+					<p:outputLabel value="Nome: " />
+					<p:inputText value="#{usuarioReportBean.nome}" />
+				</div>
+				<div class="filtro">
+					<p:outputLabel value="Status: " for="status" />
+					<p:selectOneMenu id="status" label="Status"
+						value="#{usuarioReportBean.flInativo}">
+						<f:selectItem itemLabel="Ativo" itemValue="0" />
+						<f:selectItem itemLabel="Inativo" itemValue="1" />
+					</p:selectOneMenu>
+				</div>
+				<h:commandButton value="Filtrar" ajax="tabela_pesq_usu"
+					styleClass="botao_filtrar"
+					action="#{usuarioReportBean.buscaUsuario()}" />
+			</h:panelGroup>
+
+			<h:panelGroup id="tabela" layout="block">
+				<p:dataTable id="tabela_pesq_usu" var="usu"
+					value="#{usuarioReportBean.usuarios}"
+					emptyMessage="Não há registros">
+					<p:column headerText="Nome">
+						<h:outputText value="#{usu.nome}" />
+					</p:column>
+					<p:column headerText="E-mail">
+						<h:outputText value="#{usu.email}" />
+					</p:column>
+					<p:column headerText="Login">
+						<h:outputText value="#{usu.login}" />
+					</p:column>
+					<p:column headerText="Perfil">
+						<h:outputText value="#{usu.perfil}" />
+					</p:column>
+					<p:column headerText="Status" width="50" styleClass="texto_centro">
+						<h:outputText value="#{usu.flExcluido == 0 ? 'Ativo' : 'Inativo'}"
+							styleClass="flInativo_#{usu.flExcluido}" />
+					</p:column>
+					<p:column width="50">
+						<p:commandLink value="Editar" ajax="false" styleClass="negrito_azul"
+							action="#{usuarioReportBean.atualiza(usu.idUsuario)}" />
+					</p:column>
+					<p:column width="50">
+						<p:commandLink  styleClass="negrito_azul"
+							value="#{usu.flExcluido == 0 ? 'Inativar' : 'Ativar'}"
+							oncomplete="PF('dlgInativacao').show();"
+							action="#{usuarioReportBean.selecionaParaInativar(usu)}"
+							update=":dlgInativacao"
+							rendered="#{loginBean.usuarioLogado ne usu}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+
+			<p:dialog header="Inativar / Ativar Usuário"
+				widgetVar="dlgInativacao" id="dlgInativacao" modal="true"
+				height="100">
+				<h:outputText
+					value="Deseja #{usuarioReportBean.paraInativar.flExcluido == 0 ? 'inativar' : 'ativar'} o usuário '#{usuarioReportBean.paraInativar.nome}'?" />
+				<h:panelGroup layout="block" styleClass="botoes_dialog">
+					<p:commandButton value="Sim" onclick="PF('dlgInativacao').close();"
+						action="#{usuarioReportBean.inativar()}"
+						process="form_pesquisa_usuario" update="tabela_pesq_usu" />
+					<p:commandButton value="Não" onclick="PF('dlgInativacao').close();" />
+				</h:panelGroup>
+			</p:dialog>
+
+			<h:panelGroup id="botoes" layout="block" styleClass="botao_cadastrar">
+				<h:commandButton value="Cadastrar" action="cadastro_usuario.jsf" />
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

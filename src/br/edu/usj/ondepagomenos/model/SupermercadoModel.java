@@ -8,11 +8,10 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 
-import br.edu.usj.ondepagomenos.entidades.Estado;
-import br.edu.usj.ondepagomenos.entidades.Produto;
-import br.edu.usj.ondepagomenos.entidades.Regiao;
-import br.edu.usj.ondepagomenos.entidades.Supermercado;
-import br.edu.usj.ondepagomenos.model.filtros.SupermercadoFiltro;
+import br.edu.usj.ondepagomenos.dao.Estado;
+import br.edu.usj.ondepagomenos.dao.Produto;
+import br.edu.usj.ondepagomenos.dao.Regiao;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)

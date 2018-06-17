@@ -10,7 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.edu.usj.ondepagomenos.entidades.Usuario;
+import br.edu.usj.ondepagomenos.dao.Usuario;
 import br.edu.usj.ondepagomenos.model.UsuarioModel;
 import br.edu.usj.ondepagomenos.util.MensagemUtils;
 

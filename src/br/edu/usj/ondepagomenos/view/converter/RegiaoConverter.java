@@ -5,8 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
-import br.edu.usj.ondepagomenos.entidades.Regiao;
+import br.edu.usj.ondepagomenos.dao.Categoria;
+import br.edu.usj.ondepagomenos.dao.Regiao;
 
 @FacesConverter(value = "regiaoConverter")    
 public class RegiaoConverter implements Converter {

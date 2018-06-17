@@ -5,8 +5,28 @@
   <welcome-file-list>
     <welcome-file>index.jsf</welcome-file>
   </welcome-file-list>
- 
- <!-- JSF -->
+  
+	<filter>
+		 <filter-name>UsuarioFilter</filter-name>
+		 <filter-class>br.edu.usj.ondepagomenos.filter.UsuarioFilter</filter-class>
+	</filter>
+  
+	<filter-mapping>
+	  	<filter-name>UsuarioFilter</filter-name>
+	  	<url-pattern>/usuario/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		 <filter-name>AdminFilter</filter-name>
+		 <filter-class>br.edu.usj.ondepagomenos.filter.AdminFilter</filter-class>
+	</filter>
+  
+	<filter-mapping>
+	  	<filter-name>AdminFilter</filter-name>
+	  	<url-pattern>/usuario/admin/*</url-pattern>
+	</filter-mapping>
+	  
+  <!-- JSF -->
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

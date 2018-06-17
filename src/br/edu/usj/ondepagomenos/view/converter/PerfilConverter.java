@@ -5,7 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.edu.usj.ondepagomenos.entidades.Perfil;
+import br.edu.usj.ondepagomenos.dao.Perfil;
 
 @FacesConverter(value = "perfilConverter")
 public class PerfilConverter implements Converter {

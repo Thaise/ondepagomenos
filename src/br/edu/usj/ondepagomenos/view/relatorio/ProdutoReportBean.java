@@ -8,13 +8,14 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
-import br.edu.usj.ondepagomenos.entidades.Estado;
-import br.edu.usj.ondepagomenos.entidades.Produto;
-import br.edu.usj.ondepagomenos.entidades.Regiao;
-import br.edu.usj.ondepagomenos.entidades.Supermercado;
+import br.edu.usj.ondepagomenos.dao.Categoria;
+import br.edu.usj.ondepagomenos.dao.Estado;
+import br.edu.usj.ondepagomenos.dao.Produto;
+import br.edu.usj.ondepagomenos.dao.Regiao;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
 import br.edu.usj.ondepagomenos.model.CategoriaModel;
 import br.edu.usj.ondepagomenos.model.ProdutoModel;
 import br.edu.usj.ondepagomenos.model.SupermercadoModel;
@@ -50,7 +51,8 @@ public class ProdutoReportBean implements Serializable {
 	}
 
 	public String atualiza(Integer id) throws IOException {
-		FacesContext.getCurrentInstance().getExternalContext().redirect("cadastro_produto.jsf?id=" + id);
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		externalContext.redirect(externalContext.getRequestContextPath() + "/usuario/admin/produto/cadastro_produto.jsf?id=" + id);
 		return null;
 	}
 
@@ -79,10 +81,20 @@ public class ProdutoReportBean implements Serializable {
 	public void limpar() {
 		produtoFiltro = new Produto();
 		produtoFiltro.setSupermercado(new Supermercado());
-		produtoFiltro.getSupermercado().setEstado(estados.get(23));//SC
+		produtoFiltro.getSupermercado().setEstado(estados.get(23));// SC
 		buscaRegiaoEstado();
 
 		lazyModel.setProdutoFiltro(produtoFiltro);
+	}
+
+	public String abrePaginaCadastro() {
+		try {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect(externalContext.getRequestContextPath() + "/usuario/admin/produto/cadastro_produto.jsf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void setParaDeletar(Produto paraDeletar) {

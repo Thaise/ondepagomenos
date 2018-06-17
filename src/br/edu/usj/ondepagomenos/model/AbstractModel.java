@@ -2,7 +2,7 @@ package br.edu.usj.ondepagomenos.model;
 
 import javax.persistence.EntityManager;
 
-import br.edu.usj.ondepagomenos.entidades.Entidade;
+import br.edu.usj.ondepagomenos.dao.Entidade;
 
 public abstract class AbstractModel<T extends Entidade> {
 

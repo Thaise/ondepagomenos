@@ -8,8 +8,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.persistence.NoResultException;
 
-import br.edu.usj.ondepagomenos.entidades.Perfil;
-import br.edu.usj.ondepagomenos.entidades.Usuario;
+import br.edu.usj.ondepagomenos.dao.Perfil;
+import br.edu.usj.ondepagomenos.dao.Usuario;
 import br.edu.usj.ondepagomenos.model.UsuarioModel;
 import br.edu.usj.ondepagomenos.util.MD5Utils;
 import br.edu.usj.ondepagomenos.util.MensagemUtils;
@@ -33,7 +33,7 @@ public class LoginBean implements Serializable {
 		try {
 			usuario.setSenha(MD5Utils.converteMD5(usuario.getSenha()));
 			usuarioLogado = usuarioModel.buscaUsuario(usuario);
-			return "/admin/admin.jsf";
+			return "/usuario/admin.jsf";
 		} catch (Exception e) {
 			if (e.getCause() instanceof NoResultException) {
 				MensagemUtils.mostraMensagem("Usuário não encontrado",true);

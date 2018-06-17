@@ -12,11 +12,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
-import br.edu.usj.ondepagomenos.entidades.Estado;
-import br.edu.usj.ondepagomenos.entidades.Regiao;
-import br.edu.usj.ondepagomenos.entidades.Supermercado;
+import br.edu.usj.ondepagomenos.dao.Categoria;
+import br.edu.usj.ondepagomenos.dao.Estado;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
+import br.edu.usj.ondepagomenos.dao.Regiao;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
 import br.edu.usj.ondepagomenos.model.CategoriaModel;
+import br.edu.usj.ondepagomenos.model.SupermercadoModel;
 import br.edu.usj.ondepagomenos.model.SupermercadoModel;
 import br.edu.usj.ondepagomenos.util.MensagemUtils;
 

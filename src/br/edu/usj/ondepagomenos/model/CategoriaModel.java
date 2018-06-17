@@ -11,7 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
+import br.edu.usj.ondepagomenos.dao.Categoria;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)

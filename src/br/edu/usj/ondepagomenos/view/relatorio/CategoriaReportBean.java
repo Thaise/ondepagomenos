@@ -10,7 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
+import br.edu.usj.ondepagomenos.dao.Categoria;
 import br.edu.usj.ondepagomenos.model.CategoriaModel;
 import br.edu.usj.ondepagomenos.util.MensagemUtils;
 

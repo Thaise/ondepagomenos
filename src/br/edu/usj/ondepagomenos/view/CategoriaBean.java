@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
+import br.edu.usj.ondepagomenos.dao.Categoria;
 import br.edu.usj.ondepagomenos.model.AbstractModel;
 import br.edu.usj.ondepagomenos.model.CategoriaModel;
 import br.edu.usj.ondepagomenos.util.MensagemUtils;
@@ -46,7 +46,7 @@ public class CategoriaBean extends AbstractBean<Categoria> {
 	}
 
 	public String cancelar() {
-		return "/admin/categoria/pesquisa_categoria.jsf";
+		return "/usuario/admin/categoria/pesquisa_categoria.jsf";
 	}
 
 	public Categoria getCategoria() {

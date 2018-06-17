@@ -24,6 +24,11 @@ h2 {
 	position: relative;
 }
 
+.negrito_azul {
+	font-weight: bold;
+	color: #191970 !important
+}
+
 #body {
 	width: 900px;
 	margin: 0 auto;

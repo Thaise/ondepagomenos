@@ -1,0 +1,108 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="../../template_main_adm_conteudo.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="form_pesquisa_supermercado" prependId="false">
+			<p:messages id="messages_pesq" showDetail="false" autoUpdate="true"
+				closable="true" />
+			<h2>Pesquisa de Supermercado</h2>
+
+			<h:panelGroup id="campos_filtro" layout="block">
+				<div class="filtro">
+					<p:outputLabel value="Nome: " for="nome" />
+					<p:inputText
+						value="#{supermercadoReportBean.supermercadoFiltro.nome}"
+						id="nome" />
+				</div>
+				<div class="filtro">
+					<p:outputLabel value="Estado: " for="estado" />
+					<p:selectOneMenu id="estado" label="Estado"
+						value="#{supermercadoReportBean.supermercadoFiltro.estado}"
+						converter="estadoConverter">
+						<f:selectItem itemLabel="Selecione" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{supermercadoReportBean.estados}" var="c"
+							itemLabel="#{c.uf}" />
+						<p:ajax event="change" process="@this"
+							listener="#{supermercadoReportBean.buscaRegiaoEstado}"
+							update="regiao" />
+					</p:selectOneMenu>
+				</div>
+				<div class="filtro">
+					<p:outputLabel value="Regiao: " for="regiao" />
+					<p:selectOneMenu id="regiao" label="Regiao"
+						value="#{supermercadoReportBean.supermercadoFiltro.regiao}"
+						converter="regiaoConverter">
+						<f:selectItem itemLabel="Selecione" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{supermercadoReportBean.regioes}" var="c"
+							itemLabel="#{c.nome}" />
+					</p:selectOneMenu>
+				</div>
+			</h:panelGroup>
+			<h:panelGroup styleClass="campos_filtro" layout="block">
+				<h:commandButton value="Filtrar" process="tabela_pesq_super"
+					ajax="false" update="tabela_pesq_super" />
+				<h:commandButton value="Limpar"
+					action="#{supermercadoReportBean.limpar}"
+					process="tabela_pesq_super" update="tabela_pesq_super" />
+			</h:panelGroup>
+
+			<h:panelGroup id="tabela" layout="block">
+				<p:dataTable id="tabela_pesq_super" var="super"
+					emptyMessage="Não há registros"
+					value="#{supermercadoReportBean.lazyModel}"
+					paginatorPosition="bottom" paginator="true" rows="10"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					rowsPerPageTemplate="5,10,15" lazy="true">
+					<p:column headerText="Nome">
+						<h:outputText value="#{super.nome}" />
+					</p:column>
+					<p:column headerText="Site">
+						<h:outputText value="#{super.site}" />
+					</p:column>
+					<p:column headerText="Estado" width="50" styleClass="texto_centro">
+						<h:outputText value="#{super.estado.uf}" />
+					</p:column>
+					<p:column headerText="Região">
+						<h:outputText value="#{super.regiao.nome}" />
+					</p:column>
+
+					<p:column width="50">
+						<p:commandLink value="Editar" ajax="false"  styleClass="negrito_azul"
+							action="#{supermercadoReportBean.atualiza(super.idSupermercado)}" />
+					</p:column>
+					<p:column width="50">
+						<p:commandLink value="Excluir"  styleClass="negrito_azul"
+							oncomplete="PF('dlgExclusao').show();"
+							action="#{supermercadoReportBean.selecionaParaDeletar(super)}"
+							update=":dlgExclusao" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+
+			<p:dialog header="Excluir Supermercado" widgetVar="dlgExclusao"
+				id="dlgExclusao" modal="true" height="100">
+				<h:outputText
+					value="Deseja excluir o supermercado '#{supermercadoReportBean.paraDeletar.nome}'?" />
+				<h:panelGroup layout="block" styleClass="botoes_dialog">
+					<p:commandButton value="Sim" onclick="PF('dlgExclusao').close();"
+						action="#{supermercadoReportBean.excluir()}"
+						process="form_pesquisa_supermercado" update="tabela_pesq_super" />
+					<p:commandButton value="Não" onclick="PF('dlgExclusao').close();" />
+				</h:panelGroup>
+			</p:dialog>
+
+			<h:panelGroup id="botoes" layout="block">
+				<h:commandButton value="Cadastrar" styleClass="botao_cadastrar"
+					action="cadastro_supermercado.jsf" />
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

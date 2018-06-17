@@ -5,7 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.edu.usj.ondepagomenos.entidades.Estado;
+import br.edu.usj.ondepagomenos.dao.Estado;
 
 @FacesConverter(value = "estadoConverter")    
 public class EstadoConverter implements Converter {

@@ -8,10 +8,9 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 
-import br.edu.usj.ondepagomenos.entidades.Entidade;
-import br.edu.usj.ondepagomenos.entidades.Produto;
-import br.edu.usj.ondepagomenos.entidades.Supermercado;
-import br.edu.usj.ondepagomenos.model.filtros.ProdutoFiltro;
+import br.edu.usj.ondepagomenos.dao.Entidade;
+import br.edu.usj.ondepagomenos.dao.Produto;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)

@@ -1,0 +1,61 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="../../template_main_adm_conteudo.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="form_pesquisa_categoria" prependId="false">
+			<p:messages id="messages_pesq" showDetail="false" autoUpdate="true"
+				closable="true" />
+			<h2>Pesquisa de Categoria</h2>
+
+			<h:panelGroup id="campos_filtro" layout="block">
+				<p:outputLabel value="Nome: " />
+				<p:inputText value="#{categoriaReportBean.nome}" />
+				<h:commandButton value="Filtrar" ajax="tabela_pesq_cat"
+					styleClass="botao_filtrar"
+					action="#{categoriaReportBean.buscaCategoria()}" />
+			</h:panelGroup>
+
+			<h:panelGroup id="tabela" layout="block">
+				<p:dataTable id="tabela_pesq_cat" var="cat"
+					value="#{categoriaReportBean.categorias}"
+					emptyMessage="Não há registros">
+					<p:column headerText="Nome">
+						<h:outputText value="#{cat.nome}" />
+					</p:column>
+					<p:column width="50">
+						<p:commandLink value="Editar" ajax="false"  styleClass="negrito_azul"
+							action="#{categoriaReportBean.atualiza(cat.idCategoria)}" />
+					</p:column>
+					<p:column width="50">
+						<p:commandLink value="Excluir"  styleClass="negrito_azul"
+							oncomplete="PF('dlgExclusao').show();"
+							action="#{categoriaReportBean.selecionaParaDeletar(cat)}"
+							update=":dlgExclusao" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+
+			<p:dialog header="Excluir Categoria" widgetVar="dlgExclusao"
+				id="dlgExclusao" modal="true" height="100">
+				<h:outputText
+					value="Deseja excluir a categoria '#{categoriaReportBean.paraDeletar.nome}'?" />
+				<h:panelGroup layout="block" styleClass="botoes_dialog">
+					<p:commandButton value="Sim" onclick="PF('dlgExclusao').close();"
+						action="#{categoriaReportBean.excluir()}"
+						process="form_pesquisa_categoria" update="tabela_pesq_cat" />
+					<p:commandButton value="Não" onclick="PF('dlgExclusao').close();" />
+				</h:panelGroup>
+			</p:dialog>
+
+			<h:panelGroup id="botoes" layout="block" styleClass="botao_cadastrar">
+				<h:commandButton value="Cadastrar" action="cadastro_categoria.jsf" />
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

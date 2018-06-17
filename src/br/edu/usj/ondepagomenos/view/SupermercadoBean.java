@@ -9,9 +9,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import br.edu.usj.ondepagomenos.entidades.Estado;
-import br.edu.usj.ondepagomenos.entidades.Regiao;
-import br.edu.usj.ondepagomenos.entidades.Supermercado;
+import br.edu.usj.ondepagomenos.dao.Estado;
+import br.edu.usj.ondepagomenos.dao.Regiao;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
 import br.edu.usj.ondepagomenos.model.AbstractModel;
 import br.edu.usj.ondepagomenos.model.SupermercadoModel;
 import br.edu.usj.ondepagomenos.util.MensagemUtils;
@@ -85,7 +85,7 @@ public class SupermercadoBean extends AbstractBean<Supermercado> {
 
 	@Override
 	public String cancelar() {
-		return "/admin/supermercado/pesquisa_supermercado.jsf";
+		return "/usuario/admin/supermercado/pesquisa_supermercado.jsf";
 	}
 
 	@Override

@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 import javax.faces.context.FacesContext;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
-import br.edu.usj.ondepagomenos.entidades.Entidade;
-import br.edu.usj.ondepagomenos.entidades.Produto;
+import br.edu.usj.ondepagomenos.dao.Categoria;
+import br.edu.usj.ondepagomenos.dao.Entidade;
+import br.edu.usj.ondepagomenos.dao.Produto;
 import br.edu.usj.ondepagomenos.model.AbstractModel;
 import br.edu.usj.ondepagomenos.util.MensagemUtils;
 

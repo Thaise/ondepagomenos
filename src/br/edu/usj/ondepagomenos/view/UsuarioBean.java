@@ -11,8 +11,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
-import br.edu.usj.ondepagomenos.entidades.Perfil;
-import br.edu.usj.ondepagomenos.entidades.Usuario;
+import br.edu.usj.ondepagomenos.dao.Perfil;
+import br.edu.usj.ondepagomenos.dao.Usuario;
 import br.edu.usj.ondepagomenos.model.AbstractModel;
 import br.edu.usj.ondepagomenos.model.UsuarioModel;
 import br.edu.usj.ondepagomenos.util.MD5Utils;
@@ -102,7 +102,7 @@ public class UsuarioBean extends AbstractBean<Usuario> {
 
 	@Override
 	public String cancelar() {
-		return "/admin/usuario/pesquisa_usuario.jsf";
+		return "/usuario/admin/usuario/pesquisa_usuario.jsf";
 	}
 
 	public Usuario getUsuario() {

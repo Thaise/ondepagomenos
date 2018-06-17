@@ -12,9 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
-import br.edu.usj.ondepagomenos.entidades.Supermercado;
-import br.edu.usj.ondepagomenos.entidades.Usuario;
+import br.edu.usj.ondepagomenos.dao.Categoria;
+import br.edu.usj.ondepagomenos.dao.Supermercado;
+import br.edu.usj.ondepagomenos.dao.Usuario;
 import br.edu.usj.ondepagomenos.util.MD5Utils;
 
 @Stateless

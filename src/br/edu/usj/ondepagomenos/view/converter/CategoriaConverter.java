@@ -5,7 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.edu.usj.ondepagomenos.entidades.Categoria;
+import br.edu.usj.ondepagomenos.dao.Categoria;
 
 @FacesConverter(value = "categoriaConverter")    
 public class CategoriaConverter implements Converter {
